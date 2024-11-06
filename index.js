@@ -15,23 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-function generateInvoiceNumber(invoiceId) {
-  // Convert the invoiceId to a string
-  let invoiceNumber = invoiceId.toString();
 
-  // Pad the invoice number to 7 digits if the ID is less than 7 digits
-  if (invoiceNumber.length < 7) {
-    invoiceNumber = invoiceNumber.padStart(7, '0');
-  }
-
-  // Return the formatted invoice number
-  return `INV-${invoiceNumber}`;
-}
-
-console.log(generateInvoiceNumber(1))
-console.log(generateInvoiceNumber(340))
-console.log(generateInvoiceNumber(3467))
-console.log(generateInvoiceNumber(348934834346))
 
 // Route for generating the invoice and downloading the PDF
 app.get('/invoice', (req, res) => {
