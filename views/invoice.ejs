@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 30px;
+    }
+    .logo {
+      width: 180px; /* Increased logo size */
+      margin-top: 10px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap; /* Prevent wrapping */
+    }
+    .header .company-details {
+      text-align: right;
+    }
+    .invoice-details {
+      margin-top: 20px;
+    }
+    .invoice-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    .invoice-table th,
+    .invoice-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .total {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    /* Style for the full-width line */
+    .line {
+      border-top: 1px solid #000;
+      margin: 20px 0;
+    }
+    /* From and To sections */
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <!-- Logo: Using base64 logo dynamically -->
+      <img class="logo" src="data:image/svg+xml;base64,<%= base64Logo %>" alt="Company Logo">
+
+      <!-- Invoice ID (Right side of the logo) -->
+      <div class="invoice-details" style="text-align: right; flex-grow: 1;">
+        <p><strong>Invoice Number:</strong> <%= invoiceNumber %></p>
+        <p><strong>Invoice Date:</strong> <%= invoiceDate %></p>
+        <p><strong>Due Date:</strong> <%= dueDate %></p>
+      </div>
+    </div>
+
+    <!-- Full-width line -->
+    <div class="line"></div>
+
+    <!-- From and To Sections -->
+    <div class="from-to">
+      <!-- From Section (Left-aligned) -->
+      <div class="section">
+        <h3>From</h3>
+        <p><%= companyName %></p>
+        <p><%= companyAddress %></p>
+        <p><%= companyPhone %></p>
+        <p><%= companyEmail %></p>
+      </div>
+
+      <!-- To Section (Right-aligned) -->
+      <div class="section" style="text-align: right; margin-left: px;">
+        <h3>To</h3>
+        <p><%= customerName %></p>
+        <p><%= customerAddress %></p>
+        <p><%= customerPhone %></p>
+        <p><%= customerEmail %></p>
+      </div>
+    </div>
+
+    <!-- Invoice Items Table -->
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% invoiceItems.forEach(item => { %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.price %></td>
+            <td><%= item.total %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <!-- Total Amount -->
+    <div class="total">
+      <strong>Total: </strong><%= totalAmount %>
+    </div>
+  </div>
+
+</body>
+</html>
